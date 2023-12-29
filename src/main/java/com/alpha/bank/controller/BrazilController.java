@@ -1,7 +1,7 @@
 package com.alpha.bank.controller;
 
-import com.alpha.bank.model.CityDTO;
-import com.alpha.bank.model.StateDTO;
+import com.alpha.bank.model.dto.CityDTO;
+import com.alpha.bank.model.dto.StateDTO;
 import com.alpha.bank.service.BrazilApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

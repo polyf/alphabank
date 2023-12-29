@@ -1,4 +1,4 @@
-package com.alpha.bank.model;
+package com.alpha.bank.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
