@@ -28,7 +28,6 @@ public class CompanyAccount {
     @Column(name = "business_name", nullable = false)
     private String businessName;
 
-    @NotBlank(message = "Company Size is required")
     @Enumerated(EnumType.STRING)
     @Column(name = "company_size", nullable = false)
     private CompanySizeEnum companySize;
@@ -44,7 +43,6 @@ public class CompanyAccount {
     @Embedded
     private Contact contact;
 
-    @NotBlank(message = "Status is required")
     @Enumerated(EnumType.STRING)
     @Column(name = "status", columnDefinition = "VARCHAR(20) DEFAULT 'PENDING'")
     private StatusEnum status;
