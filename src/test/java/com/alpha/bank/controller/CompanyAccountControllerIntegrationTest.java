@@ -48,7 +48,7 @@ class CompanyAccountControllerIntegrationTest {
         Long accountId = 1L;
         CompanyAccount account = new CompanyAccount();
         account.setId(accountId);
-        when(companyAccountService.getEntityById(accountId)).thenReturn(account);
+        when(companyAccountService.getCompanyAccountById(accountId)).thenReturn(account);
 
         // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/company-accounts/{id}", accountId)

@@ -25,23 +25,23 @@ public class CompanyAccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompanyAccount> getEntityById(@PathVariable Long id) {
-        CompanyAccount entity = companyAccountService.getEntityById(id);
-        if (entity != null) {
-            return ResponseEntity.ok(entity);
+    public ResponseEntity<CompanyAccount> getCompanyAccountById(@PathVariable Long id) {
+        CompanyAccount companyAccount = companyAccountService.getCompanyAccountById(id);
+        if (companyAccount != null) {
+            return ResponseEntity.ok(companyAccount);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public CompanyAccount createEntity(@RequestBody CompanyAccount companyAccount) {
+    public CompanyAccount createCompanyAccount(@RequestBody CompanyAccount companyAccount) {
         return companyAccountService.saveCompanyAccount(companyAccount);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CompanyAccount> updateEntity(@PathVariable Long id, @RequestBody CompanyAccount updatedEntity) {
-        CompanyAccount entity = companyAccountService.updateCompanyAccount(id, updatedEntity);
+    public ResponseEntity<CompanyAccount> updateCompanyAccount(@PathVariable Long id, @RequestBody CompanyAccount updatedCompanyAccount) {
+        CompanyAccount entity = companyAccountService.updateCompanyAccount(id, updatedCompanyAccount);
         if (entity != null) {
             return ResponseEntity.ok(entity);
         } else {
@@ -50,11 +50,21 @@ public class CompanyAccountController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEntity(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCompanyAccount(@PathVariable Long id) {
         if (companyAccountService.deleteCompanyAccount(id)) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/status-check")
+    public ResponseEntity<String> checkStatus(@RequestParam String cnpj) {
+        try {
+            companyAccountService.getAccountStatus(cnpj);
+            return ResponseEntity.ok("Status checked and email sent successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error checking status and sending email.");
         }
     }
 }

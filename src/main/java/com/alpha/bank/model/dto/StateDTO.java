@@ -1,5 +1,6 @@
 package com.alpha.bank.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,5 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StateDTO {
     private String id;
-    private String nome;
+    @JsonProperty("nome")
+    private String name;
+    @JsonProperty("sigla")
+    private String uf;
 }

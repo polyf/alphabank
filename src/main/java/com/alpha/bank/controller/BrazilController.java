@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/brazil")
 public class BrazilController {
@@ -21,12 +23,17 @@ public class BrazilController {
     }
 
     @GetMapping("/states")
-    public StateDTO[] getStates() {
+    public List<StateDTO> getStates() {
         return brazilApiService.getStates();
     }
 
-    @GetMapping("/cities/{stateId}")
-    public CityDTO[] getCitiesByState(@PathVariable String stateId) {
+    @GetMapping("/{stateId}/cities")
+    public List<CityDTO> getCitiesByState(@PathVariable String stateId) {
         return brazilApiService.getCitiesByState(stateId);
+    }
+
+    @GetMapping("/cities/{cityId}")
+    public CityDTO getCitiesById(@PathVariable String cityId) {
+        return brazilApiService.getCityById(cityId);
     }
 }

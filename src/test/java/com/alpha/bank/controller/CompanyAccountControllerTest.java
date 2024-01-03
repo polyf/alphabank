@@ -45,14 +45,14 @@ class CompanyAccountControllerTest {
     }
 
     @Test
-    void getEntityById() {
+    void getCompanyAccountById() {
         // Arrange
         Long accountId = 1L;
         CompanyAccount account = new CompanyAccount();
-        when(companyAccountService.getEntityById(accountId)).thenReturn(account);
+        when(companyAccountService.getCompanyAccountById(accountId)).thenReturn(account);
 
         // Act
-        ResponseEntity<CompanyAccount> result = companyAccountController.getEntityById(accountId);
+        ResponseEntity<CompanyAccount> result = companyAccountController.getCompanyAccountById(accountId);
 
         // Assert
         assertEquals(HttpStatus.OK, result.getStatusCode());
@@ -60,13 +60,13 @@ class CompanyAccountControllerTest {
     }
 
     @Test
-    void getEntityById_NotFound() {
+    void getCompanyAccountById_NotFound() {
         // Arrange
         Long accountId = 1L;
-        when(companyAccountService.getEntityById(accountId)).thenReturn(null);
+        when(companyAccountService.getCompanyAccountById(accountId)).thenReturn(null);
 
         // Act
-        ResponseEntity<CompanyAccount> result = companyAccountController.getEntityById(accountId);
+        ResponseEntity<CompanyAccount> result = companyAccountController.getCompanyAccountById(accountId);
 
         // Assert
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
@@ -79,21 +79,21 @@ class CompanyAccountControllerTest {
         when(companyAccountService.saveCompanyAccount(account)).thenReturn(account);
 
         // Act
-        CompanyAccount result = companyAccountController.createEntity(account);
+        CompanyAccount result = companyAccountController.createCompanyAccount(account);
 
         // Assert
         assertNotNull(result);
     }
 
     @Test
-    void updateEntity() {
+    void updateCompanyAccount() {
         // Arrange
         Long accountId = 1L;
         CompanyAccount updatedAccount = new CompanyAccount();
         when(companyAccountService.updateCompanyAccount(accountId, updatedAccount)).thenReturn(updatedAccount);
 
         // Act
-        ResponseEntity<CompanyAccount> result = companyAccountController.updateEntity(accountId, updatedAccount);
+        ResponseEntity<CompanyAccount> result = companyAccountController.updateCompanyAccount(accountId, updatedAccount);
 
         // Assert
         assertEquals(HttpStatus.OK, result.getStatusCode());
@@ -101,40 +101,40 @@ class CompanyAccountControllerTest {
     }
 
     @Test
-    void updateEntity_NotFound() {
+    void updateCompanyAccount_NotFound() {
         // Arrange
         Long accountId = 1L;
         CompanyAccount updatedAccount = new CompanyAccount();
         when(companyAccountService.updateCompanyAccount(accountId, updatedAccount)).thenReturn(null);
 
         // Act
-        ResponseEntity<CompanyAccount> result = companyAccountController.updateEntity(accountId, updatedAccount);
+        ResponseEntity<CompanyAccount> result = companyAccountController.updateCompanyAccount(accountId, updatedAccount);
 
         // Assert
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
     }
 
     @Test
-    void deleteEntity() {
+    void deleteCompanyAccount() {
         // Arrange
         Long accountId = 1L;
         when(companyAccountService.deleteCompanyAccount(accountId)).thenReturn(true);
 
         // Act
-        ResponseEntity<Void> result = companyAccountController.deleteEntity(accountId);
+        ResponseEntity<Void> result = companyAccountController.deleteCompanyAccount(accountId);
 
         // Assert
         assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
     }
 
     @Test
-    void deleteEntity_NotFound() {
+    void deleteCompanyAccount_NotFound() {
         // Arrange
         Long accountId = 1L;
         when(companyAccountService.deleteCompanyAccount(accountId)).thenReturn(false);
 
         // Act
-        ResponseEntity<Void> result = companyAccountController.deleteEntity(accountId);
+        ResponseEntity<Void> result = companyAccountController.deleteCompanyAccount(accountId);
 
         // Assert
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());

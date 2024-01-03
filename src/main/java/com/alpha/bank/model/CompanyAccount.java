@@ -3,6 +3,7 @@ package com.alpha.bank.model;
 import com.alpha.bank.model.enums.CompanySizeEnum;
 import com.alpha.bank.model.enums.StatusEnum;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -38,12 +39,14 @@ public class CompanyAccount {
     private String cnpj;
 
     @Embedded
+    @Valid
     private Address address;
 
     @Embedded
+    @Valid
     private Contact contact;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "VARCHAR(20) DEFAULT 'PENDING'")
-    private StatusEnum status;
+    @Column(name = "status")
+    private StatusEnum status = StatusEnum.PENDING;
 }

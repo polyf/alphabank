@@ -43,27 +43,27 @@ class CompanyAccountServiceTest {
     }
 
     @Test
-    void getEntityById() {
+    void getCompanyAccountById() {
         // Arrange
         Long accountId = 1L;
         CompanyAccount account = new CompanyAccount();
         when(companyAccountRepository.findById(accountId)).thenReturn(Optional.of(account));
 
         // Act
-        CompanyAccount result = companyAccountService.getEntityById(accountId);
+        CompanyAccount result = companyAccountService.getCompanyAccountById(accountId);
 
         // Assert
         assertNotNull(result);
     }
 
     @Test
-    void getEntityById_NotFound() {
+    void getCompanyAccountById_NotFound() {
         // Arrange
         Long accountId = 1L;
         when(companyAccountRepository.findById(accountId)).thenReturn(Optional.empty());
 
         // Act
-        CompanyAccount result = companyAccountService.getEntityById(accountId);
+        CompanyAccount result = companyAccountService.getCompanyAccountById(accountId);
 
         // Assert
         assertNull(result);
