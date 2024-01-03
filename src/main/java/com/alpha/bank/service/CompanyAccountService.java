@@ -7,6 +7,7 @@ import com.alpha.bank.repository.CompanyAccountRepository;
 import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -21,6 +22,9 @@ public class CompanyAccountService {
 
     private final CompanyAccountRepository companyAccountRepository;
     private final JavaMailSender javaMailSender;
+
+    @Value("${mail.username}")
+    private String username;
 
     @Autowired
     public CompanyAccountService(CompanyAccountRepository companyAccountRepository, JavaMailSender javaMailSender) {
@@ -77,7 +81,7 @@ public class CompanyAccountService {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-            helper.setFrom("contato@relyon.dev.br");
+            helper.setFrom(username);
             helper.setTo(email);
             helper.setSubject("Account Status Update for CNPJ: " + cnpj);
             helper.setText("Your account status is: " + status);
@@ -87,6 +91,5 @@ public class CompanyAccountService {
             log.error("Error sending email: {}", e.getMessage(), e);
             throw new EmailSendingException("Error sending status email to '" + email + "' for CNPJ: " + cnpj, e);
         }
-
     }
 }
